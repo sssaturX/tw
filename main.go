@@ -20,9 +20,9 @@ func main() {
 }
 
 func run(args []string) error {
+	// If no arguments, launch web UI with default settings
 	if len(args) == 0 {
-		printUsage()
-		return nil
+		return webCommand([]string{"--channel", "general"})
 	}
 
 	switch args[0] {
@@ -249,12 +249,13 @@ Commands:
   points     Explains unsupported viewer balance/redeem API
 
 Examples:
-  go run . accounts
-  go run . web --channel somechannel
-  go run . live --account bot1 --channel somechannel
-  go run . send --account bot1 --channel somechannel --message "Kappa"
-  go run . send --all --channel somechannel --message "hello" --delay 2s
-  go run . emotes --account bot1 --kind channel --channel somechannel
-  go run . rewards --account broadcaster
+  twitch-multi-tool.exe                          (launches web UI)
+  twitch-multi-tool.exe accounts
+  twitch-multi-tool.exe web --channel somechannel
+  twitch-multi-tool.exe live --account bot1 --channel somechannel
+  twitch-multi-tool.exe send --account bot1 --channel somechannel --message "Kappa"
+  twitch-multi-tool.exe send --all --channel somechannel --message "hello" --delay 2s
+  twitch-multi-tool.exe emotes --account bot1 --kind channel --channel somechannel
+  twitch-multi-tool.exe rewards --account broadcaster
 `)
 }
