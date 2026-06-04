@@ -15,9 +15,15 @@ if errorlevel 1 (
     exit /b 1
 )
 
+REM Check if we're in the right directory
+if not exist "go.mod" (
+    echo Error: go.mod not found
+    echo Please run this script from the project root directory
+    exit /b 1
+)
+
 REM Build variables
 set OUTPUT=twitch-multi-tool.exe
-set PACKAGE=main
 
 REM Clean old build
 if exist %OUTPUT% (
@@ -27,11 +33,15 @@ if exist %OUTPUT% (
 
 REM Download dependencies
 echo Downloading dependencies...
-go mod download
+call go mod download
+if errorlevel 1 (
+    echo Failed to download dependencies
+    exit /b 1
+)
 
-REM Build with embedded web server startup
+REM Build
 echo Compiling...
-go build -o %OUTPUT% %PACKAGE%
+call go build -o %OUTPUT%
 
 if errorlevel 1 (
     echo.
@@ -48,6 +58,7 @@ echo.
 echo Starting twitch-multi-tool web server...
 echo Browser will open automatically...
 echo.
+timeout /t 2 /nobreak
 start http://127.0.0.1:8080
 
 REM Launch the executable with web flag and default channel
