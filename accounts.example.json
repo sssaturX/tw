@@ -1,0 +1,21 @@
+{
+  "accounts": [
+    {
+      "name": "bot1",
+      "login": "bot_login",
+      "token": "oauth_token_without_oauth_prefix",
+      "socks5_proxy": "socks5://127.0.0.1:1080"
+    },
+    {
+      "name": "bot2",
+      "token": "another_oauth_token"
+    }
+  ],
+  "presets": [
+    {
+      "id": "hello",
+      "title": "Hello",
+      "message": "Hello chat!"
+    }
+  ]
+}
